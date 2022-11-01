@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
 
 android {
     compileSdkVersion ANDROID_BUILD_SDK_VERSION as int
@@ -8,10 +7,6 @@ android {
         minSdkVersion ANDROID_BUILD_MIN_SDK_VERSION as int
         targetSdkVersion ANDROID_BUILD_TARGET_SDK_VERSION as int
         consumerProguardFiles 'consumer-proguard-rules.pro'
-    }
-
-    dataBinding {
-        enabled = true
     }
 
     lintOptions {
@@ -30,3 +25,5 @@ dependencies {
     compileOnly 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
     compileOnly 'org.xutils:xutils:3.5.0'
 }
+
+apply from: 'https://raw.githubusercontent.com/Ayagikei/mvn-repo/main/gradle-mvn-push.gradle'
