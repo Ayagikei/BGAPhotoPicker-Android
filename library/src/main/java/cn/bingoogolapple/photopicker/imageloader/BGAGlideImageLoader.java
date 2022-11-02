@@ -20,6 +20,9 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
+import androidx.annotation.DrawableRes;
+import androidx.annotation.Nullable;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
@@ -29,8 +32,6 @@ import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.request.transition.Transition;
 
-import androidx.annotation.DrawableRes;
-import androidx.annotation.Nullable;
 import cn.bingoogolapple.baseadapter.BGABaseAdapterUtil;
 
 /**
@@ -43,8 +44,7 @@ public class BGAGlideImageLoader extends BGAImageLoader {
     @Override
     public void display(final ImageView imageView, String path, @DrawableRes int loadingResId, @DrawableRes int failResId, int width, int height, final DisplayDelegate delegate) {
         final String finalPath = getPath(path);
-        Activity activity = getActivity(imageView);
-        Glide.with(activity).load(finalPath).apply(new RequestOptions().placeholder(loadingResId).error(failResId).override(width, height)).listener(new RequestListener<Drawable>() {
+        Glide.with(imageView).load(finalPath).apply(new RequestOptions().placeholder(loadingResId).error(failResId).override(width, height)).listener(new RequestListener<Drawable>() {
             @Override
             public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
                 return false;

@@ -19,9 +19,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.graphics.Bitmap;
-import androidx.annotation.DrawableRes;
 import android.view.View;
 import android.widget.ImageView;
+
+import androidx.annotation.DrawableRes;
 
 /**
  * 作者:王浩 邮件:bingoogolapple@gmail.com

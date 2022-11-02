@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'org.jetbrains.kotlin.android'
 
 android {
     compileSdkVersion ANDROID_BUILD_SDK_VERSION as int
@@ -12,10 +13,20 @@ android {
     lintOptions {
         abortOnError false
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.core:core-ktx:1.3.0'
     compileOnly 'androidx.legacy:legacy-support-v4:1.0.0'
     compileOnly 'androidx.recyclerview:recyclerview:1.0.0'
     compileOnly 'com.github.bingoogolapple:BGABaseAdapter-Android:2.0.1'
@@ -24,6 +35,7 @@ dependencies {
     compileOnly 'com.squareup.picasso:picasso:2.5.2'
     compileOnly 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
     compileOnly 'org.xutils:xutils:3.5.0'
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
 }
 
 apply from: 'https://raw.githubusercontent.com/Ayagikei/mvn-repo/main/gradle-mvn-push.gradle'

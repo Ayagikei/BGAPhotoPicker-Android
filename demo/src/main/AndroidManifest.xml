@@ -14,6 +14,7 @@
         <activity
             android:name=".activity.MomentListActivity"
             android:screenOrientation="portrait"
+            android:exported="true"
             android:windowSoftInputMode="stateAlwaysHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

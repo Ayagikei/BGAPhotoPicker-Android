@@ -60,7 +60,7 @@ public class BGASavePhotoTask extends BGAAsyncTask<Void, Void> {
         FileOutputStream fos = null;
         try {
             fos = new FileOutputStream(mNewFile);
-            mBitmap.get().compress(Bitmap.CompressFormat.PNG, 100, fos);
+            mBitmap.get().compress(Bitmap.CompressFormat.WEBP, 100, fos);
             fos.flush();
 
             // 通知图库更新

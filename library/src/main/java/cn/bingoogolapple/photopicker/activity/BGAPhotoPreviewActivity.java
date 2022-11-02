@@ -19,10 +19,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.core.view.ViewCompat;
-import androidx.viewpager.widget.ViewPager;
-import androidx.core.view.ViewPropertyAnimatorListenerAdapter;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,19 +26,23 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.ViewPropertyAnimatorListenerAdapter;
+import androidx.viewpager2.widget.ViewPager2;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import cn.bingoogolapple.baseadapter.BGAOnNoDoubleClickListener;
 import cn.bingoogolapple.photopicker.R;
-import cn.bingoogolapple.photopicker.adapter.BGAPhotoPageAdapter;
+import cn.bingoogolapple.photopicker.adapter.PhotoPageAdapter;
 import cn.bingoogolapple.photopicker.imageloader.BGAImage;
 import cn.bingoogolapple.photopicker.imageloader.BGAImageLoader;
 import cn.bingoogolapple.photopicker.util.BGAAsyncTask;
 import cn.bingoogolapple.photopicker.util.BGAPhotoPickerUtil;
 import cn.bingoogolapple.photopicker.util.BGASavePhotoTask;
-import cn.bingoogolapple.photopicker.widget.BGAHackyViewPager;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
 /**
@@ -57,8 +57,9 @@ public class BGAPhotoPreviewActivity extends BGAPPToolbarActivity implements Pho
 
     private TextView mTitleTv;
     private ImageView mDownloadIv;
-    private BGAHackyViewPager mContentHvp;
-    private BGAPhotoPageAdapter mPhotoPageAdapter;
+    private ViewPager2 mContentHvp;
+    //private BGAPhotoPageAdapter mPhotoPageAdapter;
+    private PhotoPageAdapter mPhotoPageAdapter;
 
     private boolean mIsSinglePreview;
 
@@ -66,6 +67,13 @@ public class BGAPhotoPreviewActivity extends BGAPPToolbarActivity implements Pho
 
     private boolean mIsHidden = false;
     private BGASavePhotoTask mSavePhotoTask;
+
+    private ViewPager2.OnPageChangeCallback mOnPageChangeCallback = new ViewPager2.OnPageChangeCallback() {
+        @Override
+        public void onPageSelected(int position) {
+            renderTitleTv();
+        }
+    };
 
     /**
      * 上一次标题栏显示或隐藏的时间戳
@@ -124,12 +132,7 @@ public class BGAPhotoPreviewActivity extends BGAPPToolbarActivity implements Pho
 
     @Override
     protected void setListener() {
-        mContentHvp.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-            @Override
-            public void onPageSelected(int position) {
-                renderTitleTv();
-            }
-        });
+        mContentHvp.registerOnPageChangeCallback(mOnPageChangeCallback);
     }
 
     @Override
@@ -146,9 +149,9 @@ public class BGAPhotoPreviewActivity extends BGAPPToolbarActivity implements Pho
             currentPosition = 0;
         }
 
-        mPhotoPageAdapter = new BGAPhotoPageAdapter(this, previewPhotos);
+        mPhotoPageAdapter = new PhotoPageAdapter(this, previewPhotos);
         mContentHvp.setAdapter(mPhotoPageAdapter);
-        mContentHvp.setCurrentItem(currentPosition);
+        mContentHvp.setCurrentItem(currentPosition, false);
 
         // 过2秒隐藏标题栏
         mToolbar.postDelayed(new Runnable() {
@@ -193,7 +196,7 @@ public class BGAPhotoPreviewActivity extends BGAPPToolbarActivity implements Pho
         if (mIsSinglePreview) {
             mTitleTv.setText(R.string.bga_pp_view_photo);
         } else {
-            mTitleTv.setText((mContentHvp.getCurrentItem() + 1) + "/" + mPhotoPageAdapter.getCount());
+            mTitleTv.setText((mContentHvp.getCurrentItem() + 1) + "/" + mPhotoPageAdapter.getItemCount());
         }
     }
 
@@ -235,8 +238,7 @@ public class BGAPhotoPreviewActivity extends BGAPPToolbarActivity implements Pho
         if (mSavePhotoTask != null) {
             return;
         }
-
-        final String url = mPhotoPageAdapter.getItem(mContentHvp.getCurrentItem());
+        final String url = mPhotoPageAdapter.getPreviewPhotos().get(mContentHvp.getCurrentItem());
         File file;
         if (url.startsWith("file")) {
             file = new File(url.replace("file://", ""));
@@ -247,7 +249,7 @@ public class BGAPhotoPreviewActivity extends BGAPPToolbarActivity implements Pho
         }
 
         // 通过MD5加密url生成文件名，避免多次保存同一张图片
-        file = new File(mSavePhotoDir, BGAPhotoPickerUtil.md5(url) + ".png");
+        file = new File(mSavePhotoDir, BGAPhotoPickerUtil.md5(url) + ".webp");
         if (file.exists()) {
             BGAPhotoPickerUtil.showSafe(getString(R.string.bga_pp_save_img_success_folder, mSavePhotoDir.getAbsolutePath()));
             return;
@@ -286,6 +288,7 @@ public class BGAPhotoPreviewActivity extends BGAPPToolbarActivity implements Pho
             mSavePhotoTask.cancelTask();
             mSavePhotoTask = null;
         }
+        mContentHvp.unregisterOnPageChangeCallback(mOnPageChangeCallback);
         super.onDestroy();
     }
 }
