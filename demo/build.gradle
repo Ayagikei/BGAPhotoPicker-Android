@@ -34,7 +34,7 @@ dependencies {
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:2.7'
     testImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:2.7'
 
-    implementation 'pub.devrel:easypermissions:1.0.1'
+    implementation 'pub.devrel:easypermissions:3.0.0'
     // 以上几个库是演示案例所使用到的
 
     implementation project(':library')

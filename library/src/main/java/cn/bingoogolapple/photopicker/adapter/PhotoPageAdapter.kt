@@ -14,6 +14,9 @@ import cn.bingoogolapple.photopicker.util.BGABrowserPhotoViewAttacher
 import cn.bingoogolapple.photopicker.util.BGAPhotoPickerUtil
 import cn.bingoogolapple.photopicker.widget.BGAImageView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.model.GlideUrl
+import com.davemorrissey.labs.subscaleview.ImageSource
+import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
 import uk.co.senab.photoview.PhotoViewAttacher.OnViewTapListener
 
 class PhotoPageAdapter(
@@ -52,25 +55,32 @@ class PhotoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         arguments?.takeIf { it.containsKey("url") }?.apply {
             val url = getString("url")
-            val bgaImageView = view.findViewById<BGAImageView>(R.id.bga_image_view)
-            val photoViewAttacher = BGABrowserPhotoViewAttacher(bgaImageView)
-            (context as? OnViewTapListener)?.let { photoViewAttacher.setOnViewTapListener(it) }
-            bgaImageView.setDelegate(BGAImageView.Delegate { drawable ->
-                if (drawable != null && drawable.intrinsicHeight > drawable.intrinsicWidth && drawable.intrinsicHeight > BGAPhotoPickerUtil.getScreenHeight()) {
-                    photoViewAttacher.setIsSetTopCrop(true)
-                    photoViewAttacher.setUpdateBaseMatrix()
-                } else {
-                    photoViewAttacher.update()
-                }
-            })
+            val imageView = view.findViewById<SubsamplingScaleImageView>(R.id.image_view)
 
-            BGAImage.display(
-                bgaImageView,
-                mipmap.bga_pp_ic_holder_dark,
-                url,
-                BGAPhotoPickerUtil.getScreenWidth(),
-                BGAPhotoPickerUtil.getScreenHeight()
-            )
+            Glide.with(view.context)
+                .download(GlideUrl(url))
+                .into(SubsamplingScaleImageViewTarget(imageView))
+
+            //bgaImageView.setImage(ImageSource.uri(url?: ""))
+//
+//            val photoViewAttacher = BGABrowserPhotoViewAttacher(bgaImageView)
+//            (context as? OnViewTapListener)?.let { photoViewAttacher.setOnViewTapListener(it) }
+//            bgaImageView.setDelegate(BGAImageView.Delegate { drawable ->
+//                if (drawable != null && drawable.intrinsicHeight > drawable.intrinsicWidth && drawable.intrinsicHeight > BGAPhotoPickerUtil.getScreenHeight()) {
+//                    photoViewAttacher.setIsSetTopCrop(true)
+//                    photoViewAttacher.setUpdateBaseMatrix()
+//                } else {
+//                    photoViewAttacher.update()
+//                }
+//            })
+//
+//            BGAImage.display(
+//                bgaImageView,
+//                mipmap.bga_pp_ic_holder_dark,
+//                url,
+//                BGAPhotoPickerUtil.getScreenWidth(),
+//                BGAPhotoPickerUtil.getScreenHeight()
+//            )
 
         }
     }
@@ -78,13 +88,13 @@ class PhotoFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
 
-        kotlin.runCatching {
-            view?.findViewById<BGAImageView>(R.id.bga_image_view)?.apply {
-                Glide.with(this).clear(this)
-            }
-        }.onFailure {
-            it.printStackTrace()
-        }
+//        kotlin.runCatching {
+//            view?.findViewById<BGAImageView>(R.id.bga_image_view)?.apply {
+//                Glide.with(this).clear(this)
+//            }
+//        }.onFailure {
+//            it.printStackTrace()
+//        }
     }
 
 }
