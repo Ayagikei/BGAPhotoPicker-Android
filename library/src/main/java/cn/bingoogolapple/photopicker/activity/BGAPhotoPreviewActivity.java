@@ -43,14 +43,13 @@ import cn.bingoogolapple.photopicker.imageloader.BGAImageLoader;
 import cn.bingoogolapple.photopicker.util.BGAAsyncTask;
 import cn.bingoogolapple.photopicker.util.BGAPhotoPickerUtil;
 import cn.bingoogolapple.photopicker.util.BGASavePhotoTask;
-import uk.co.senab.photoview.PhotoViewAttacher;
 
 /**
  * 作者:王浩 邮件:bingoogolapple@gmail.com
  * 创建时间:16/6/24 下午2:59
  * 描述:图片预览界面
  */
-public class BGAPhotoPreviewActivity extends BGAPPToolbarActivity implements PhotoViewAttacher.OnViewTapListener, BGAAsyncTask.Callback<Void> {
+public class BGAPhotoPreviewActivity extends BGAPPToolbarActivity implements BGAAsyncTask.Callback<Void> {
     private static final String EXTRA_SAVE_PHOTO_DIR = "EXTRA_SAVE_PHOTO_DIR";
     private static final String EXTRA_PREVIEW_PHOTOS = "EXTRA_PREVIEW_PHOTOS";
     private static final String EXTRA_CURRENT_POSITION = "EXTRA_CURRENT_POSITION";
@@ -200,8 +199,8 @@ public class BGAPhotoPreviewActivity extends BGAPPToolbarActivity implements Pho
         }
     }
 
-    @Override
-    public void onViewTap(View view, float x, float y) {
+
+    public void onViewTap() {
         if (System.currentTimeMillis() - mLastShowHiddenTime > 500) {
             mLastShowHiddenTime = System.currentTimeMillis();
             if (mIsHidden) {

@@ -2,22 +2,17 @@ package cn.bingoogolapple.photopicker.adapter
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import cn.bingoogolapple.photopicker.R
-import cn.bingoogolapple.photopicker.R.mipmap
-import cn.bingoogolapple.photopicker.imageloader.BGAImage
-import cn.bingoogolapple.photopicker.util.BGABrowserPhotoViewAttacher
-import cn.bingoogolapple.photopicker.util.BGAPhotoPickerUtil
-import cn.bingoogolapple.photopicker.widget.BGAImageView
+import cn.bingoogolapple.photopicker.activity.BGAPhotoPreviewActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.model.GlideUrl
-import com.davemorrissey.labs.subscaleview.ImageSource
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
-import uk.co.senab.photoview.PhotoViewAttacher.OnViewTapListener
 
 class PhotoPageAdapter(
     fragmentActivity: FragmentActivity,
@@ -60,6 +55,15 @@ class PhotoFragment : Fragment() {
             Glide.with(view.context)
                 .download(GlideUrl(url))
                 .into(SubsamplingScaleImageViewTarget(imageView))
+
+            imageView.setOnTouchListener { v, event ->
+                // on view tag
+                if (event.action == MotionEvent.ACTION_UP) {
+                    // on view tap
+                    (activity as BGAPhotoPreviewActivity)?.onViewTap()
+                }
+                return@setOnTouchListener false
+            }
 
             //bgaImageView.setImage(ImageSource.uri(url?: ""))
 //

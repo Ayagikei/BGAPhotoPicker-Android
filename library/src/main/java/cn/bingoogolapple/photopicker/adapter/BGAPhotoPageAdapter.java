@@ -12,7 +12,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ *//*
+
 package cn.bingoogolapple.photopicker.adapter;
 
 import android.graphics.drawable.Drawable;
@@ -29,11 +30,13 @@ import cn.bingoogolapple.photopicker.util.BGAPhotoPickerUtil;
 import cn.bingoogolapple.photopicker.widget.BGAImageView;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
+*/
 /**
  * 作者:王浩 邮件:bingoogolapple@gmail.com
  * 创建时间:16/6/27 下午6:35
  * 描述:大图预览适配器
- */
+ *//*
+
 public class BGAPhotoPageAdapter extends PagerAdapter {
     private ArrayList<String> mPreviewPhotos;
     private PhotoViewAttacher.OnViewTapListener mOnViewTapListener;
@@ -84,4 +87,4 @@ public class BGAPhotoPageAdapter extends PagerAdapter {
     public String getItem(int position) {
         return mPreviewPhotos == null ? "" : mPreviewPhotos.get(position);
     }
-}
+}*/

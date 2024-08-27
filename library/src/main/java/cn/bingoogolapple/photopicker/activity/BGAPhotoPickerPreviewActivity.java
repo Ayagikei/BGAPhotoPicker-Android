@@ -12,7 +12,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ *//*
+
 package cn.bingoogolapple.photopicker.activity;
 
 import android.content.Context;
@@ -38,11 +39,13 @@ import cn.bingoogolapple.photopicker.util.BGAPhotoPickerUtil;
 import cn.bingoogolapple.photopicker.widget.BGAHackyViewPager;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
+*/
 /**
  * 作者:王浩 邮件:bingoogolapple@gmail.com
  * 创建时间:16/6/24 下午2:57
  * 描述:图片选择预览界面
- */
+ *//*
+
 public class BGAPhotoPickerPreviewActivity extends BGAPPToolbarActivity implements PhotoViewAttacher.OnViewTapListener {
     private static final String EXTRA_PREVIEW_PHOTOS = "EXTRA_PREVIEW_PHOTOS";
     private static final String EXTRA_SELECTED_PHOTOS = "EXTRA_SELECTED_PHOTOS";
@@ -61,19 +64,25 @@ public class BGAPhotoPickerPreviewActivity extends BGAPPToolbarActivity implemen
     private ArrayList<String> mSelectedPhotos;
     private BGAPhotoPageAdapter mPhotoPageAdapter;
     private int mMaxChooseCount = 1;
-    /**
+    */
+/**
      * 右上角按钮文本
-     */
+     *//*
+
     private String mTopRightBtnText;
 
     private boolean mIsHidden = false;
-    /**
+    */
+/**
      * 上一次标题栏显示或隐藏的时间戳
-     */
+     *//*
+
     private long mLastShowHiddenTime;
-    /**
+    */
+/**
      * 是否是拍完照后跳转过来
-     */
+     *//*
+
     private boolean mIsFromTakePhoto;
 
     public static class IntentBuilder {
@@ -83,25 +92,31 @@ public class BGAPhotoPickerPreviewActivity extends BGAPPToolbarActivity implemen
             mIntent = new Intent(context, BGAPhotoPickerPreviewActivity.class);
         }
 
-        /**
+        */
+/**
          * 图片选择张数的最大值
-         */
+         *//*
+
         public IntentBuilder maxChooseCount(int maxChooseCount) {
             mIntent.putExtra(EXTRA_MAX_CHOOSE_COUNT, maxChooseCount);
             return this;
         }
 
-        /**
+        */
+/**
          * 当前已选中的图片路径集合
-         */
+         *//*
+
         public IntentBuilder selectedPhotos(ArrayList<String> selectedPhotos) {
             mIntent.putStringArrayListExtra(EXTRA_SELECTED_PHOTOS, selectedPhotos);
             return this;
         }
 
-        /**
+        */
+/**
          * 当前预览的图片路径集合
-         */
+         *//*
+
         public IntentBuilder previewPhotos(ArrayList<String> previewPhotos) {
             if (previewPhotos.size() > 1000) {
                 sPreviewPhotos = previewPhotos;
@@ -111,17 +126,21 @@ public class BGAPhotoPickerPreviewActivity extends BGAPPToolbarActivity implemen
             return this;
         }
 
-        /**
+        */
+/**
          * 当前预览图片的索引
-         */
+         *//*
+
         public IntentBuilder currentPosition(int currentPosition) {
             mIntent.putExtra(EXTRA_CURRENT_POSITION, currentPosition);
             return this;
         }
 
-        /**
+        */
+/**
          * 是否是拍完照后跳转过来
-         */
+         *//*
+
         public IntentBuilder isFromTakePhoto(boolean isFromTakePhoto) {
             mIntent.putExtra(EXTRA_IS_FROM_TAKE_PHOTO, isFromTakePhoto);
             return this;
@@ -132,22 +151,26 @@ public class BGAPhotoPickerPreviewActivity extends BGAPPToolbarActivity implemen
         }
     }
 
-    /**
+    */
+/**
      * 获取已选择的图片集合
      *
      * @param intent
      * @return
-     */
+     *//*
+
     public static ArrayList<String> getSelectedPhotos(Intent intent) {
         return intent.getStringArrayListExtra(EXTRA_SELECTED_PHOTOS);
     }
 
-    /**
+    */
+/**
      * 是否是拍照预览
      *
      * @param intent
      * @return
-     */
+     *//*
+
     public static boolean getIsFromTakePhoto(Intent intent) {
         return intent.getBooleanExtra(EXTRA_IS_FROM_TAKE_PHOTO, false);
     }
@@ -299,9 +322,11 @@ public class BGAPhotoPickerPreviewActivity extends BGAPPToolbarActivity implemen
         }
     }
 
-    /**
+    */
+/**
      * 渲染右上角按钮
-     */
+     *//*
+
     private void renderTopRightBtn() {
         if (mIsFromTakePhoto) {
             mSubmitTv.setEnabled(true);
@@ -364,4 +389,4 @@ public class BGAPhotoPickerPreviewActivity extends BGAPPToolbarActivity implemen
         }
     }
 
-}
+}*/

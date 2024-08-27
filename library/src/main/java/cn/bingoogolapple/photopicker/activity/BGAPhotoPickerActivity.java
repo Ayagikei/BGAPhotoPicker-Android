@@ -12,7 +12,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ *//*
+
 package cn.bingoogolapple.photopicker.activity;
 
 import android.content.Context;
@@ -49,11 +50,13 @@ import cn.bingoogolapple.photopicker.util.BGAPhotoHelper;
 import cn.bingoogolapple.photopicker.util.BGALoadPhotoTask;
 import cn.bingoogolapple.photopicker.util.BGAPhotoPickerUtil;
 
+*/
 /**
  * 作者:王浩 邮件:bingoogolapple@gmail.com
  * 创建时间:16/6/24 下午2:55
  * 描述:图片选择界面
- */
+ *//*
+
 public class BGAPhotoPickerActivity extends BGAPPToolbarActivity implements BGAOnItemChildClickListener, BGAAsyncTask.Callback<ArrayList<BGAPhotoFolderModel>> {
     private static final String EXTRA_CAMERA_FILE_DIR = "EXTRA_CAMERA_FILE_DIR";
     private static final String EXTRA_SELECTED_PHOTOS = "EXTRA_SELECTED_PHOTOS";
@@ -62,13 +65,17 @@ public class BGAPhotoPickerActivity extends BGAPPToolbarActivity implements BGAO
 
     private static final String STATE_SELECTED_PHOTOS = "STATE_SELECTED_PHOTOS";
 
-    /**
+    */
+/**
      * 拍照的请求码
-     */
+     *//*
+
     private static final int REQUEST_CODE_TAKE_PHOTO = 1;
-    /**
+    */
+/**
      * 预览照片的请求码
-     */
+     *//*
+
     private static final int RC_PREVIEW = 2;
 
     private static final int SPAN_COUNT = 3;
@@ -80,21 +87,29 @@ public class BGAPhotoPickerActivity extends BGAPPToolbarActivity implements BGAO
 
     private BGAPhotoFolderModel mCurrentPhotoFolderModel;
 
-    /**
+    */
+/**
      * 是否可以拍照
-     */
+     *//*
+
     private boolean mTakePhotoEnabled;
-    /**
+    */
+/**
      * 最多选择多少张图片，默认等于1，为单选
-     */
+     *//*
+
     private int mMaxChooseCount = 1;
-    /**
+    */
+/**
      * 右上角按钮文本
-     */
+     *//*
+
     private String mTopRightBtnText;
-    /**
+    */
+/**
      * 图片目录数据集合
-     */
+     *//*
+
     private ArrayList<BGAPhotoFolderModel> mPhotoFolderModels;
 
     private BGAPhotoPickerAdapter mPicAdapter;
@@ -122,36 +137,44 @@ public class BGAPhotoPickerActivity extends BGAPPToolbarActivity implements BGAO
             mIntent = new Intent(context, BGAPhotoPickerActivity.class);
         }
 
-        /**
+        */
+/**
          * 拍照后图片保存的目录。如果传 null 表示没有拍照功能，如果不为 null 则具有拍照功能，
-         */
+         *//*
+
         public IntentBuilder cameraFileDir(@Nullable File cameraFileDir) {
             mIntent.putExtra(EXTRA_CAMERA_FILE_DIR, cameraFileDir);
             return this;
         }
 
-        /**
+        */
+/**
          * 图片选择张数的最大值
          *
          * @param maxChooseCount
          * @return
-         */
+         *//*
+
         public IntentBuilder maxChooseCount(int maxChooseCount) {
             mIntent.putExtra(EXTRA_MAX_CHOOSE_COUNT, maxChooseCount);
             return this;
         }
 
-        /**
+        */
+/**
          * 当前已选中的图片路径集合，可以传 null
-         */
+         *//*
+
         public IntentBuilder selectedPhotos(@Nullable ArrayList<String> selectedPhotos) {
             mIntent.putStringArrayListExtra(EXTRA_SELECTED_PHOTOS, selectedPhotos);
             return this;
         }
 
-        /**
+        */
+/**
          * 滚动列表时是否暂停加载图片，默认为 false
-         */
+         *//*
+
         public IntentBuilder pauseOnScroll(boolean pauseOnScroll) {
             mIntent.putExtra(EXTRA_PAUSE_ON_SCROLL, pauseOnScroll);
             return this;
@@ -162,12 +185,14 @@ public class BGAPhotoPickerActivity extends BGAPPToolbarActivity implements BGAO
         }
     }
 
-    /**
+    */
+/**
      * 获取已选择的图片集合
      *
      * @param intent
      * @return
-     */
+     *//*
+
     public static ArrayList<String> getSelectedPhotos(Intent intent) {
         return intent.getStringArrayListExtra(EXTRA_SELECTED_PHOTOS);
     }
@@ -271,11 +296,13 @@ public class BGAPhotoPickerActivity extends BGAPPToolbarActivity implements BGAO
         return true;
     }
 
-    /**
+    */
+/**
      * 返回已选中的图片集合
      *
      * @param selectedPhotos
-     */
+     *//*
+
     private void returnSelectedPhotos(ArrayList<String> selectedPhotos) {
         Intent intent = new Intent();
         intent.putStringArrayListExtra(EXTRA_SELECTED_PHOTOS, selectedPhotos);
@@ -307,9 +334,11 @@ public class BGAPhotoPickerActivity extends BGAPPToolbarActivity implements BGAO
         ViewCompat.animate(mArrowIv).setDuration(BGAPhotoFolderPw.ANIM_DURATION).rotation(-180).start();
     }
 
-    /**
+    */
+/**
      * 显示只能选择 mMaxChooseCount 张图的提示
-     */
+     *//*
+
     private void toastMaxCountTip() {
         BGAPhotoPickerUtil.show(getString(R.string.bga_pp_toast_photo_picker_max, mMaxChooseCount));
     }
@@ -348,9 +377,11 @@ public class BGAPhotoPickerActivity extends BGAPPToolbarActivity implements BGAO
         }
     }
 
-    /**
+    */
+/**
      * 渲染右上角按钮
-     */
+     *//*
+
     private void renderTopRightBtn() {
         if (mSubmitTv == null) {
             return;
@@ -390,9 +421,11 @@ public class BGAPhotoPickerActivity extends BGAPPToolbarActivity implements BGAO
         }
     }
 
-    /**
+    */
+/**
      * 处理拍照
-     */
+     *//*
+
     private void handleTakePhoto() {
         if (mMaxChooseCount == 1) {
             // 单选
@@ -404,9 +437,11 @@ public class BGAPhotoPickerActivity extends BGAPPToolbarActivity implements BGAO
         }
     }
 
-    /**
+    */
+/**
      * 拍照
-     */
+     *//*
+
     private void takePhoto() {
         try {
             startActivityForResult(mPhotoHelper.getTakePhotoIntent(), REQUEST_CODE_TAKE_PHOTO);
@@ -415,11 +450,13 @@ public class BGAPhotoPickerActivity extends BGAPPToolbarActivity implements BGAO
         }
     }
 
-    /**
+    */
+/**
      * 跳转到图片选择预览界面
      *
      * @param position 当前点击的item的索引位置
-     */
+     *//*
+
     private void changeToPreview(int position) {
         int currentPosition = position;
         if (mCurrentPhotoFolderModel.isTakePhotoEnabled()) {
@@ -436,11 +473,13 @@ public class BGAPhotoPickerActivity extends BGAPPToolbarActivity implements BGAO
         startActivityForResult(photoPickerPreviewIntent, RC_PREVIEW);
     }
 
-    /**
+    */
+/**
      * 处理点击选择按钮事件
      *
      * @param position 当前点击的item的索引位置
-     */
+     *//*
+
     private void handleClickSelectFlagIv(int position) {
         String currentPhoto = mPicAdapter.getItem(position);
         if (mMaxChooseCount == 1) {
@@ -518,4 +557,4 @@ public class BGAPhotoPickerActivity extends BGAPPToolbarActivity implements BGAO
 
         super.onDestroy();
     }
-}
+}*/

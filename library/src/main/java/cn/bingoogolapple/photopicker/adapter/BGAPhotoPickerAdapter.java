@@ -12,7 +12,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ *//*
+
 package cn.bingoogolapple.photopicker.adapter;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,11 +27,13 @@ import cn.bingoogolapple.photopicker.imageloader.BGAImage;
 import cn.bingoogolapple.photopicker.model.BGAPhotoFolderModel;
 import cn.bingoogolapple.photopicker.util.BGAPhotoPickerUtil;
 
+*/
 /**
  * 作者:王浩 邮件:bingoogolapple@gmail.com
  * 创建时间:16/6/28 上午11:09
  * 描述:
- */
+ *//*
+
 public class BGAPhotoPickerAdapter extends BGARecyclerViewAdapter<String> {
     private ArrayList<String> mSelectedPhotos = new ArrayList<>();
     private int mPhotoSize;
@@ -95,3 +98,4 @@ public class BGAPhotoPickerAdapter extends BGARecyclerViewAdapter<String> {
         setData(photoFolderModel.getPhotos());
     }
 }
+*/

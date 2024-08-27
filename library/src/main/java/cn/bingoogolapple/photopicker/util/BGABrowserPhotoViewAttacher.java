@@ -12,20 +12,21 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *******************************************************************************/
+ *******************************************************************************//*
+
 package cn.bingoogolapple.photopicker.util;
 
 import android.graphics.Matrix;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
-import uk.co.senab.photoview.PhotoViewAttacher;
-
+*/
 /**
  * 作者:王浩 邮件:bingoogolapple@gmail.com
  * 创建时间:16/7/15 上午10:35
  * 描述:
- */
+ *//*
+
 public class BGABrowserPhotoViewAttacher extends PhotoViewAttacher {
 
     public BGABrowserPhotoViewAttacher(ImageView imageView) {
@@ -34,11 +35,13 @@ public class BGABrowserPhotoViewAttacher extends PhotoViewAttacher {
 
     private boolean isSetTopCrop = false;
 
-    /**
+    */
+/**
      * 必须重写此方法，防止其他函数覆盖，导致setTopCrop不成功
      *
      * @param d - Drawable being displayed
-     */
+     *//*
+
     @Override
     protected void updateBaseMatrix(Drawable d) {
         if (isSetTopCrop) {
@@ -78,4 +81,4 @@ public class BGABrowserPhotoViewAttacher extends PhotoViewAttacher {
         updateBaseMatrix(matrix);
     }
 
-}
+}*/
