@@ -1,5 +1,6 @@
 package cn.bingoogolapple.photopicker.adapter
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -12,6 +13,7 @@ import cn.bingoogolapple.photopicker.R
 import cn.bingoogolapple.photopicker.activity.BGAPhotoPreviewActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.model.GlideUrl
+import com.davemorrissey.labs.subscaleview.ImageSource
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
 
 class PhotoPageAdapter(
@@ -52,9 +54,18 @@ class PhotoFragment : Fragment() {
             val url = getString("url")
             val imageView = view.findViewById<SubsamplingScaleImageView>(R.id.image_view)
 
-            Glide.with(view.context)
-                .download(GlideUrl(url))
-                .into(SubsamplingScaleImageViewTarget(imageView))
+            if (url?.startsWith("http") == true) {
+                Glide.with(view.context)
+                    .download(GlideUrl(url))
+                    .into(SubsamplingScaleImageViewTarget(imageView))
+            } else {
+                imageView.setImage(ImageSource.resource(R.mipmap.bga_pp_ic_holder_dark))
+                try {
+                    imageView.setImage(ImageSource.uri(Uri.parse(url)))
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
 
             imageView.setOnTouchListener { v, event ->
                 // on view tag
